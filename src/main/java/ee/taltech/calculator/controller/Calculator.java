@@ -40,6 +40,12 @@ public class Calculator {
                 .mapToInt(Integer::intValue)
                 .sum();
 
+        Double AverageOfPositives = input.stream()
+                .filter(x -> x >= 0)
+                .mapToDouble(x -> (double) x)
+                .average()
+                .orElse(0.0);
+
     }
 }
 
