@@ -27,5 +27,19 @@ public class Calculator {
                 .filter(x -> x % 2 != 0)
                 .collect(Collectors.toList());
     }
+
+    @GetMapping("calculate2")
+    public void calculate2(@RequestParam List<Integer> input){
+
+        List <Integer> Squared = input.stream()
+                .map(x -> x * x)
+                .collect(Collectors.toList());
+
+        Integer SumOfEven = input.stream()
+                .filter(x -> x % 2 == 0)
+                .mapToInt(Integer::intValue)
+                .sum();
+
+    }
 }
 
