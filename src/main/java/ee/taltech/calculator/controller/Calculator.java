@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 public class Calculator {
@@ -21,6 +22,10 @@ public class Calculator {
                 .filter(x -> x % 2 == 0)
                 .mapToInt(Integer::intValue)
                 .sum();
+
+        List <Integer> Odds = input.stream()
+                .filter(x -> x % 2 != 0)
+                .collect(Collectors.toList());
     }
 }
 
