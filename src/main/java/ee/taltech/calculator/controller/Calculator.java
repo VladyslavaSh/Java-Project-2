@@ -1,5 +1,7 @@
 package ee.taltech.calculator.controller;
 
+import ee.taltech.calculator.dto.CalculationResult1;
+import ee.taltech.calculator.dto.CalculationResult2;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,7 +14,7 @@ import java.util.stream.Collectors;
 public class Calculator {
 
     @GetMapping("calculate1")
-    public void calculate1(@RequestParam List<Integer> input){
+    public CalculationResult1 calculate1(@RequestParam List<Integer> input){
 
         Optional<Integer> MinOdd = input.stream()
                 .filter(x -> x % 2 != 0)
@@ -26,10 +28,12 @@ public class Calculator {
         List <Integer> Odds = input.stream()
                 .filter(x -> x % 2 != 0)
                 .collect(Collectors.toList());
+
+        return new CalculationResult1(MinOdd, SumOfEven, Odds);
     }
 
     @GetMapping("calculate2")
-    public void calculate2(@RequestParam List<Integer> input){
+    public CalculationResult2 calculate2(@RequestParam List<Integer> input){
 
         List <Integer> Squared = input.stream()
                 .map(x -> x * x)
@@ -46,6 +50,7 @@ public class Calculator {
                 .average()
                 .orElse(0.0);
 
+        return new CalculationResult2(Squared, SumOfEven, AverageOfPositives);
     }
 }
 
