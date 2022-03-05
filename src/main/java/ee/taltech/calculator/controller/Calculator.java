@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -44,13 +46,15 @@ public class Calculator {
                 .mapToInt(Integer::intValue)
                 .sum();
 
-        Double AverageOfPositives = input.stream()
+        double AverageOfPositives = input.stream()
                 .filter(x -> x >= 0)
                 .mapToDouble(x -> (double) x)
                 .average()
                 .orElse(0.0);
 
-        return new CalculationResult2(Squared, SumOfEven, AverageOfPositives);
+        BigDecimal AverageOfPositivesNew = new BigDecimal(AverageOfPositives).setScale(2, RoundingMode.HALF_UP);
+
+        return new CalculationResult2(Squared, SumOfEven, AverageOfPositivesNew.doubleValue());
     }
 }
 
