@@ -1,4 +1,4 @@
-package ee.taltech.calculator.controller;
+package ee.taltech.calculator;
 
 import org.springframework.stereotype.Service;
 
@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class Calculation {
+public class Operations {
 
 
     public static Optional<Integer> minOdd(List<Integer> input) {
