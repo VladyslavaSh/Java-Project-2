@@ -16,13 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @SpringBootTest
 class CalculatorApplicationTests {
 
-	//Calculation1 Tests
+	//Opetations Tests
 
 	@Test
 	void minOddNormal() {
 		List<Integer> all = List.of (1,2,3,5,8);
-		int min = 1;
-		assertEquals(min, Operations.minOdd(all));
+		assertEquals(Optional.of(1), Operations.minOdd(all));
 	}
 
 	@Test
@@ -55,8 +54,6 @@ class CalculatorApplicationTests {
 		assertEquals(null, Operations.odds(all));
 	}
 
-	//Calculation2 Tests
-
 	@Test
 	void squaredNormal() {
 		List<Integer> all = List.of (1, 2, 3);
@@ -87,6 +84,66 @@ class CalculatorApplicationTests {
 	void averageOfPositivesNull() {
 		List<Integer> all = List.of (-1, -2, -3);
 		assertEquals(null, Operations.averageOfPositives(all));
+	}
+
+	//Calculation1 Tests
+
+	@Test
+	void Calculation1Normal() {
+		List<Integer> all = List.of (1, 2, 3);
+		assertEquals(Optional.of(1), new Calculation1(all).getMinOdd());
+		assertEquals(2, new Calculation1(all).getSumOfEven());
+		assertEquals(List.of(1,3), new Calculation1(all).getOdds());
+	}
+
+	@Test
+	void Calculation1NoOdds() {
+		List<Integer> all = List.of (2, 8);
+		assertEquals(Optional.empty(), new Calculation1(all).getMinOdd());
+		assertEquals(10, new Calculation1(all).getSumOfEven());
+		assertEquals(null, new Calculation1(all).getOdds());
+	}
+
+	@Test
+	void Calculation1NoEvens() {
+		List<Integer> all = List.of (1, 5);
+		assertEquals(Optional.of(1), new Calculation1(all).getMinOdd());
+		assertEquals(null, new Calculation1(all).getSumOfEven());
+		assertEquals(List.of(1,5), new Calculation1(all).getOdds());
+	}
+
+	@Test
+	void Calculation1Empty() {
+		List<Integer> all = List.of ();
+		assertEquals(Optional.empty(), new Calculation1(all).getMinOdd());
+		assertEquals(null, new Calculation1(all).getSumOfEven());
+		assertEquals(null, new Calculation1(all).getOdds());
+	}
+
+	//Calculation2 Tests
+
+	@Test
+	void Calculation2Normal() {
+		List<Integer> all = List.of (1, 2, 3);
+		assertEquals(List.of(1, 4 ,9), new Calculation2(all).getSquared());
+		assertEquals(2, new Calculation2(all).getSumOfEven());
+		assertEquals(new BigDecimal(2).setScale(2, RoundingMode.HALF_UP), new Calculation2(all).getAverageOfPositives());
+	}
+
+	@Test
+	void Calculation2NoPositives() {
+		List<Integer> all = List.of (-1, -2, -3);
+		assertEquals(List.of(1, 4 ,9), new Calculation2(all).getSquared());
+		assertEquals(-2, new Calculation2(all).getSumOfEven());
+		assertEquals(null, new Calculation2(all).getAverageOfPositives());
+	}
+
+	@Test
+	void Calculation2Empty() {
+		List<Integer> all = List.of ();
+		assertEquals(List.of(), new Calculation2(all).getSquared());
+		assertEquals(null, new Calculation2(all).getSumOfEven());
+		assertEquals(null, new Calculation2(all).getAverageOfPositives());
 	}
 }
 
