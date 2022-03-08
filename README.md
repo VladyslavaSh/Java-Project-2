@@ -22,7 +22,7 @@ This is students project for Java Technologies course
 
 ## API request examples
 1. Request: http://localhost:8080/calculator/calculate1?input=1,2,3,4,5
-    Response: {"minOdd":1,"sumOfEven":6,"odds":[1,3,5]}
+   Response: {"minOdd":1,"sumOfEven":6,"odds":[1,3,5]}
 2. Request: http://localhost:8080/calculator/calculate1?input=1,99
    Response: {"minOdd":1,"sumOfEven": null,"odds":[1,99]}
 3. Request: http://localhost:8080/calculator/calculate1?input=-2,0,4,12,-8
@@ -31,3 +31,7 @@ This is students project for Java Technologies course
    Response: {"minOdd":3,"sumOfEven":24,"odds":[5,3]}
 5. Request:  http://localhost:8080/calculator/calculate2?input=-6,9,5,-1,8
    Response: {"squared":[36,81,25,1,64],"sumOfEven":2,"averageOfPositives":7.33}
+6. Request: http://localhost:8080/calculator/calculate1?input=1,2,3
+   Response: {"minOdd":1,"sumOfEven":2,"odds":[1,3]} 
+7. Request: http://localhost:8080/calculator/calculate2?input=5,-2,1
+   Response: {"squared":[25,4,1], "sumOfEven":-2, "averageOfPositives":3.00}
