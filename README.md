@@ -18,6 +18,10 @@
 
 ## API request examples
 1. Request: http://localhost:8080/calculator/calculate1?input=1,2,3,4,5
-    Response: {"minOdd":1,"sumOfEven":6,"odds":[1,3,5]}
+   Response: {"minOdd":1,"sumOfEven":6,"odds":[1,3,5]}
 2. Request: http://localhost:8080/calculator/calculate1?input=1,99
    Response: {"minOdd":1,"sumOfEven": null,"odds":[1,99]}
+3. Request: /calculator/calculate1?input=1,2,3
+   Response: {"minOdd":1,"sumOfEven":2,"odds":[1,3]} 
+4. Request: /calculator/calculate2?input=5,-2,1
+   Response: {"squared":[25,4,1], "sumOfEven":-2, "averageOfPositives":3.00}
