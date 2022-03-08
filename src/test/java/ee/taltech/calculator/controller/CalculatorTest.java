@@ -29,7 +29,7 @@ class CalculatorTest {
     private MockMvc mvc;
 
     @Test
-    @DisplayName("index returns greetings from spring boot")
+//    @DisplayName("index returns greetings from spring boot")
     void indexTest() throws Exception {
         mvc.perform(get("/"))
                 .andExpect(status().is4xxClientError())
@@ -49,17 +49,45 @@ class CalculatorTest {
                 .andExpect(content().json("{\"minOdd\":1,\"sumOfEven\":2,\"odds\":[1,3]}"));
     }
 
- /*   @Test
-    void calc1Test() {
-        mvc.perform(get("/calculator/calculate1?input=1,2,3"))
-                .andExpect(contentType(MediaType.APPLICATION_JSON));
-                .andExpect(content().json(
-                        {
-                        "minOdd":1,
-                        "sumOfEven":2,
-                        "odds":[1,3]
-                        }
-                        ));
-    }*/
+    @Test
+    void calc1Test3() throws Exception {
+        mvc.perform(get("/calculator/calculate1?input=1,3"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json("{\"minOdd\":1,\"sumOfEven\":null,\"odds\":[1,3]}"));
+    }
 
+    @Test
+    void calc1Test4() throws Exception {
+        mvc.perform(get("/calculator/calculate1?input="))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json("{\"minOdd\":null,\"sumOfEven\":null,\"odds\": null}"));
+    }
+
+    @Test
+    void calc2Test1() throws Exception {
+        mvc.perform(get("/calculator/calculate2?input=1,2,3"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json("{\"squared\":[1,4,9],\"sumOfEven\":2,\"averageOfPositives\":2.00}"));
+    }
+
+    @Test
+    void calc2Test2() throws Exception {
+        mvc.perform(get("/calculator/calculate2?input=-1,-2,-3"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json("{\"squared\":[1,4,9],\"sumOfEven\":-2,\"averageOfPositives\":null}"));
+    }
+
+    @Test
+    void calc2Test3() throws Exception {
+        mvc.perform(get("/calculator/calculate2?input=-1, 3"))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json("{\"squared\":[1,9],\"sumOfEven\": null,\"averageOfPositives\":3}"));
+    }
+
+    @Test
+    void calc2Test4() throws Exception {
+        mvc.perform(get("/calculator/calculate2?input="))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(content().json("{\"squared\":[],\"sumOfEven\": null,\"averageOfPositives\":null}"));
+    }
 }
