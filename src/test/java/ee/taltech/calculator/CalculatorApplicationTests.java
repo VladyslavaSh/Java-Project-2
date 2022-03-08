@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 @SpringBootTest
 class CalculatorApplicationTests {
 
-	//Opetations Tests
+	//Operations Tests
 
 	@Test
 	void minOddNormal() {
